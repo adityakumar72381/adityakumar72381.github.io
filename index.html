@@ -1,282 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POST PASTE</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      text-align: center;
-      transition: background 0.3s, color 0.3s;
-    }
-    a { text-decoration: none; }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      background: #111;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .site-name {
-      font-size: 1.8em;
-      font-weight: bold;
-      background: linear-gradient(90deg, #ff5f6d, #ffc371, #47caff, #ff5f6d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .site-name a { color: inherit; }
-    .theme-toggle {
-      cursor: pointer;
-      width: 30px;
-      height: 30px;
-      transition: transform 0.3s;
-    }
-    .theme-toggle:hover { transform: rotate(20deg); }
-    .description {
-      font-weight: bold;
-      font-size: 1.2em;
-      margin: 20px;
-      color: #00ffea;
-    }
-    .gallery { padding: 0 10px; margin-top: 10px; }
-    .gallery img {
-      width: calc(100% - 20px);
-      max-width: 100%;
-      display: block;
-      margin: 10px auto;
-      border-radius: 8px;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 0.8s ease forwards;
-    }
-    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
-    .urls-block {
-      margin: 20px auto;
-      max-width: 500px;
-      text-align: left;
-    }
-    .urls-block a {
-      display: block;
-      margin: 8px 0;
-      padding: 10px;
-      background: #222;
-      border-radius: 6px;
-      color: #00ffea;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .urls-block a:hover { background: #333; }
-    .uploaded-by {
-      margin-top: 20px;
-      font-size: 1em;
-      color: #ccc;
-    }
-    .uploaded-by a {
-      color: #00ffea;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .uploaded-by svg { width: 20px; height: 20px; fill: #00ffea; }
-    .yellow-banner {
-      display: none;
-      position: relative;
-      background: #FFD600;
-      color: #000;
-      margin: 20px auto;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 500px;
-      text-align: center;
-      font-weight: bold;
-      animation: slideUp 0.6s ease forwards;
-    }
-    .yellow-banner .btn-telegram {
-      display: block;
-      background: #000;
-      color: #FFD600;
-      padding: 12px 20px;
-      margin: 15px auto 0;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    .yellow-banner .btn-telegram:hover { background: #222; }
-    .yellow-banner .close-btn {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      font-size: 20px;
-      cursor: pointer;
-      color: #000;
-    }
-    @keyframes slideUp {
-      from { transform: translateY(40px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .landing {
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
-    .landing img.logo {
-      width: 120px;
-      border-radius: 50%;
-      margin-bottom: 15px;
-    }
-    .landing h1 {
-      font-size: 2em;
-      text-transform: uppercase;
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea; }
-      to { text-shadow: 0 0 20px #00ffea, 0 0 40px #00ffea; }
-    }
-    .btn {
-      display: inline-block;
-      background: #00ffea;
-      color: #111;
-      padding: 10px 18px;
-      border-radius: 8px;
-      margin-top: 15px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .btn:hover { background: #00c7b5; }
-    footer { margin: 30px 0 20px; font-size: 0.9em; color: #888; }
-    footer a { color: #00ffea; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pastebin - Create and Share Links & Text</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:#0b0d10; --text:#e8f1f7; --card:#12151b; --muted:#9aa4b2;
+  --accent:#3ea6ff; --link:#47caff; --radius:14px; --shadow:0 4px 40px rgba(0,0,0,0.45);
+}
+body {
+  margin:0; font-family:'Inter',sans-serif; background:var(--bg); color:var(--text);
+  transition:background 0.4s,color 0.4s; overflow-x:hidden;
+}
+body.no-scroll {overflow:hidden;}
+
+header {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 22px; 
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  background:var(--bg);
+  box-shadow:0 1px 0 rgba(0,0,0,0.6);
+  position:relative; z-index:2000;
+}
+.light header {
+  border-bottom:1px solid rgba(0,0,0,0.1);
+  box-shadow:0 1px 0 rgba(0,0,0,0.08);
+}
+
+.title {
+  font-family:'Poppins',sans-serif; font-weight:700; font-size:1.5rem;
+  background:linear-gradient(90deg,#47caff,#ff5f6d);
+  -webkit-background-clip:text; color:transparent; letter-spacing:0.5px;
+}
+.header-right {display:flex; align-items:center; gap:16px;}
+.theme-toggle,.menu-icon {cursor:pointer;width:28px;height:28px;}
+main {max-width:900px;margin:auto;padding:40px 20px;}
+section {
+  background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:24px; margin:24px 0; opacity:0; transform:translateY(30px);
+  animation:fadeUp 0.8s ease forwards;
+}
+section:nth-child(2){animation-delay:0.1s;}
+section:nth-child(3){animation-delay:0.2s;}
+section:nth-child(4){animation-delay:0.3s;}
+section:nth-child(5){animation-delay:0.4s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+h1,h2{font-family:'Poppins',sans-serif;}
+h1{font-size:1.8rem;margin-bottom:12px;}
+h2{font-size:1.4rem;margin-bottom:10px;}
+p{line-height:1.6;color:var(--muted);}
+a{color:var(--link);text-decoration:none;}
+a:hover{text-decoration:underline;}
+button{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:12px 22px;font-size:1rem;cursor:pointer;transition:background 0.3s;
+}
+button:hover{background:#1e90ff;}
+.hero{text-align:center;padding:50px 0 30px 0;}
+.hero h1{font-size:2rem;}
+.hero p{font-size:1.1rem;color:var(--muted);}
+.cta-buttons{margin-top:20px;}
+.cta-buttons button{margin:0 8px;}
+footer{text-align:center;color:var(--muted);padding:40px 0;font-size:0.9rem;}
+.light{
+  --bg:#f9fafc;--text:#0b0d10;--card:#fff;--muted:#444;--link:#0056d6;--shadow:none;
+}
+
+.menu-overlay{
+  position:fixed;top:0;right:-100%;width:100%;height:100%;
+  background:var(--bg);color:var(--text);
+  display:flex;flex-direction:column;
+  transition:right 0.4s ease-in-out;z-index:1500;
+}
+.menu-overlay.active{right:0;}
+.menu-links{
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:120px;
+  gap:26px;flex:1;
+}
+.menu-links a{
+  font-size:1.4rem;color:var(--text);text-decoration:none;transition:color 0.2s;
+}
+.menu-links a:hover{color:var(--accent);}
+</style>
 </head>
 <body>
-  <header>
-    <div class="site-name"><a href="/">POST PASTE</a></div>
-    <svg id="themeToggle" class="theme-toggle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"
-        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
-    </svg>
-  </header>
+<header>
+  <div class="title">PASTEBIN</div>
+  <div class="header-right">
+    <div id="themeToggle">
+      <svg class="theme-toggle" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z"/></svg>
+    </div>
+    <div id="menuBtn" class="menu-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </div>
+  </div>
+</header>
 
-  <main id="content"></main>
+<div id="menuOverlay" class="menu-overlay">
+  <div class="menu-links">
+    <a href="#create">Create</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+  </div>
+</div>
 
-  <footer>
-    © POST PASTE cc || powered by 
-    <a href="https://t.me/automated_world" target="_blank">@automated_world</a>
-  </footer>
+<main>
+  <div class="hero">
+    <h1>Create and Publish Plain Text Containing Links</h1>
+    <p>No login required — create and share right away.</p>
+    <div class="cta-buttons">
+      <button onclick="scrollToSection('create')">Start Now</button>
+      <button onclick="scrollToSection('about')">Learn More</button>
+    </div>
+  </div>
 
-  <script>
-    const escapeHTML = (str = '') => str
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
+  <section id="create">
+    <h2>Paste Links and Text Together</h2>
+    <p>Write text, web addresses, or both, and publish instantly. Links are converted automatically — just separate with a space or new line.</p>
+  </section>
 
-    async function fetchPostData(hash) {
-      try {
-        const res = await fetch("https://tom-kerry-enjoyed-investigators.trycloudflare.com/fetch_post", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            "x-api-key": "1"
-          },
-          body: JSON.stringify({ hash })
-        });
-        return await res.json();
-      } catch (err) {
-        console.error(err);
-        return null;
-      }
-    }
+  <section>
+    <h2>Reliable & Long Established</h2>
+    <p>Pastebin has been online since 2014 with minimal downtime. We ensure 24/7 uptime and lightning-fast performance.</p>
+  </section>
 
-    function renderLanding() {
-      document.getElementById("content").innerHTML = `
-        <div class="landing">
-          <img class="logo" src="https://files.catbox.moe/07peh0.jpg" alt="Automated World Logo">
-          <h1>WELCOME TO AUTOMATED WORLD</h1>
-          <a class="btn" href="https://t.me/automated_world" target="_blank">JOIN CHANNEL</a>
-          <div class="section">
-            <h2>ABOUT THIS SITE</h2>
-            <p>POST PASTE helps you share photo collections easily. Display posts with multiple images and creator info dynamically.</p>
-          </div>
-          <a class="btn" href="https://t.me/Yoursadityaaa" target="_blank">CREATE YOUR OWN POST</a>
-        </div>`;
-    }
+  <section id="contact">
+    <h2>Human Translated</h2>
+    <p>Available in 12 languages, translated by native speakers.</p>
+  </section>
 
-    async function renderPost(hash) {
-      const data = await fetchPostData(hash);
-      if (!data || !data.description) {
-        renderLanding();
-        return;
-      }
+  <section id="about">
+    <h2>Anonymous Editing & Security</h2>
+    <p>Edit anytime with an edit code — no account needed.</p>
+  </section>
 
-      let html = '';
-      html += `<div class="description">${escapeHTML(data.description)}</div>`;
-      if (Array.isArray(data.urls)) {
-        html += '<div class="urls-block">';
-        for (const link of data.urls) {
-          html += `<a href="${escapeHTML(link)}" target="_blank">${escapeHTML(link)}</a>`;
-        }
-        html += '</div>';
-      } else if (Array.isArray(data.images)) {
-        html += '<div class="gallery">';
-        let delay = 0;
-        for (const img of data.images) {
-          html += `<img src="${escapeHTML(img.url)}" style="animation-delay:${delay}s;" loading="lazy">`;
-          delay += 0.3;
-        }
-        html += '</div>';
-      }
+  <section>
+    <h2>Earn From Your Pastes</h2>
+    <p>Set up an ad connection to earn from your links.</p>
+  </section>
+</main>
 
-      if (data.creator_name && data.creator_url) {
-        html += `
-        <div class="uploaded-by">
-          <a href="${escapeHTML(data.creator_url)}" target="_blank">
-            Uploaded by ${escapeHTML(data.creator_name)}
-          </a>
-        </div>`;
-      }
+<footer>© 2025 Pastebin.net | All Rights Reserved</footer>
 
-      html += `
-      <div id="yellowBanner" class="yellow-banner">
-        <span class="close-btn">&times;</span>
-        <div>WANT TO CREATE SUCH POST ??</div>
-        <a class="btn-telegram" href="https://t.me/Yoursadityaaa" target="_blank">
-          MESSAGE ME ON TELEGRAM
-        </a>
-      </div>`;
-      document.getElementById("content").innerHTML = html;
+<script>
+function darkIcon(){
+return `<svg class="theme-toggle" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z"/></svg>`;
+}
+function lightIcon(){
+return `<svg class="theme-toggle" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clip-rule="evenodd"/></svg>`;
+}
+function menuSvg(){
+return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>`;
+}
+function closeSvg(){
+return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6.225 4.811a1 1 0 0 0-1.414 1.414L10.586 12l-5.775 5.775a1 1 0 0 0 1.414 1.414L12 13.414l5.775 5.775a1 1 0 0 0 1.414-1.414L13.414 12l5.775-5.775a1 1 0 0 0-1.414-1.414L12 10.586 6.225 4.811Z" clip-rule="evenodd"/></svg>`;
+}
 
-      setTimeout(() => {
-        const banner = document.getElementById('yellowBanner');
-        if (banner) banner.style.display = 'block';
-      }, 3000);
-    }
-
-    const path = location.pathname.replace(/^\//, '').trim();
-    if (path) renderPost(path);
-    else renderLanding();
-
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('close-btn')) {
-        document.getElementById('yellowBanner').style.display = 'none';
-      }
-    });
-
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-    });
-  </script>
+const toggle=document.getElementById('themeToggle');
+toggle.addEventListener('click',()=>{
+  document.body.classList.toggle('light');
+  toggle.innerHTML=document.body.classList.contains('light')?lightIcon():darkIcon();
+});
+const menuBtn=document.getElementById('menuBtn');
+const menuOverlay=document.getElementById('menuOverlay');
+let menuOpen=false;
+menuBtn.addEventListener('click',()=>{
+  menuOpen=!menuOpen;
+  menuOverlay.classList.toggle('active');
+  document.body.classList.toggle('no-scroll',menuOpen);
+  menuBtn.innerHTML=menuOpen?closeSvg():menuSvg();
+});
+function scrollToSection(id){
+  const target=document.getElementById(id);
+  if(target) target.scrollIntoView({behavior:"smooth"});
+}
+</script>
 </body>
 </html>
