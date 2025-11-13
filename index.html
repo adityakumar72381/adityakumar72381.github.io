@@ -1,122 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>AutoVerse Bypass</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0d0d0d;
-            color: #fff;
-            padding: 30px;
-        }
-        .box {
-            max-width: 500px;
-            margin: auto;
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            font-size: 15px;
-            margin-top: 10px;
-            border-radius: 8px;
-            border: none;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            background: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #005fcc;
-        }
-        .result {
-            margin-top: 20px;
-            background: #111;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
-        }
-        a {
-            color: #4da3ff;
-            word-break: break-all;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NXLinks - Premium Link Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:#0b0d10; --text:#e8f1f7; --card:#12151b; --muted:#9aa4b2;
+  --accent:#3ea6ff; --link:#47caff; --radius:14px; --shadow:0 4px 40px rgba(0,0,0,0.45);
+}
+body {
+  margin:0; font-family:'Inter',sans-serif; background:var(--bg); color:var(--text);
+  transition:background 0.4s,color 0.4s; overflow-x:hidden;
+}
+body.no-scroll {overflow:hidden;}
+header {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 22px; 
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  background:var(--bg);
+  box-shadow:0 1px 0 rgba(0,0,0,0.6);
+  position:relative; z-index:2000;
+}
+.title {
+  font-family:'Poppins',sans-serif; font-weight:700; font-size:1.5rem;
+  background:linear-gradient(90deg,#47caff,#ff5f6d);
+  -webkit-background-clip:text; color:transparent; letter-spacing:0.5px;
+}
+.header-right {display:flex; align-items:center; gap:16px;}
+.menu-icon,.theme-toggle {cursor:pointer;width:28px;height:28px;}
+main {max-width:900px;margin:auto;padding:40px 20px;}
+section {
+  background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:24px; margin:24px 0; opacity:0; transform:translateY(30px);
+  animation:fadeUp 0.8s ease forwards;
+}
+section:nth-child(2){animation-delay:0.1s;}
+section:nth-child(3){animation-delay:0.2s;}
+section:nth-child(4){animation-delay:0.3s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+h1,h2{font-family:'Poppins',sans-serif;}
+h1{font-size:1.8rem;margin-bottom:12px;}
+h2{font-size:1.4rem;margin-bottom:10px;}
+p{line-height:1.6;color:var(--muted);}
+a{color:var(--link);text-decoration:none;}
+button{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:12px 22px;font-size:1rem;cursor:pointer;transition:background 0.3s;
+}
+button:hover{background:#1e90ff;}
+.hero{text-align:center;padding:50px 0 30px 0;}
+.hero h1{font-size:2rem;}
+.cta-buttons{margin-top:20px;}
+.cta-buttons button{margin:0 8px;}
+footer{text-align:center;color:var(--muted);padding:40px 0;font-size:0.9rem;}
+.light{
+  --bg:#f9fafc;--text:#0b0d10;--card:#fff;--muted:#444;--link:#0056d6;--shadow:none;
+}
+/* Modal */
+#bypassBox {
+  background:var(--card);padding:20px;border-radius:var(--radius);
+  margin-top:20px;display:none;box-shadow:var(--shadow);
+}
+input{
+  width:100%;padding:12px;border:none;border-radius:10px;margin-bottom:14px;
+  background:#1d1f25;color:#fff;font-size:15px;
+}
+#resultBox {
+  margin-top:15px;background:#0f1115;padding:15px;border-radius:10px;display:none;
+  word-break:break-all;
+}
+</style>
 </head>
 <body>
+<header>
+  <div class="title">NXLinks</div>
+  <div class="header-right">
+    <div id="themeToggle" class="theme-toggle"></div>
+    <div id="menuBtn" class="menu-icon"></div>
+  </div>
+</header>
+<main>
+  <div class="hero">
+    <h1>World's Cleanest Link Tools</h1>
+    <p>Bypass, Decode, Analyze — All in one powerful interface.</p>
+    <div class="cta-buttons">
+      <button onclick="scrollToSection('bypass')">Bypass Link</button>
+    </div>
+  </div>  <section id="bypass">
+    <h2>Premium Link Bypass</h2>
+    <p>Enter any supported URL and NXLinks will process it with our secure backend API.</p><input type="text" id="userLink" placeholder="Enter your link here..." />
+<button onclick="startBypass()">Process</button>
 
-<div class="box">
-    <h2>🔗 AutoVerse Link Bypass</h2>
-    <input type="text" id="urlInput" placeholder="Paste your link here...">
-    <button onclick="bypass()">Bypass Now</button>
+<div id="resultBox"></div>
 
-    <div id="result" class="result"></div>
-</div>
+  </section>
+</main>
+<footer>© 2025 NXLinks.site | All Rights Reserved</footer><script>
+// THEME TOGGLE SVGs
+function moon(){return `<svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z"/></svg>`;} 
+function sun(){return `<svg fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></svg>`;} 
 
-<script>
-async function bypass() {
-    const url = document.getElementById("urlInput").value.trim();
-    const resultBox = document.getElementById("result");
+document.getElementById("themeToggle").innerHTML = moon();
+document.getElementById("themeToggle").onclick = () => {
+  document.body.classList.toggle("light");
+  document.getElementById("themeToggle").innerHTML = document.body.classList.contains("light") ? sun() : moon();
+};
 
-    if (!url) {
-        alert("Please enter a URL.");
-        return;
+// Smooth scroll
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:"smooth"});}
+
+// SECURE BACKEND CALL (NO API KEY EXPOSED)
+async function startBypass() {
+  const link = document.getElementById("userLink").value.trim();
+  if (!link) return alert("Enter a URL first");
+
+  const resultBox = document.getElementById("resultBox");
+  resultBox.style.display = "block";
+  resultBox.innerHTML = "Processing...";
+
+  try {
+    // Call your backend (Cloudflare Worker recommended)
+    const response = await fetch("/api/bypass", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({url: link})
+    });
+
+    const data = await response.json();
+
+    if (data.error) {
+      resultBox.innerHTML = `<b>Error:</b> ${data.error}`;
+      return;
     }
 
-    resultBox.style.display = "block";
-    resultBox.innerHTML = "⏳ Processing your request...";
-
-    try {
-        const response = await fetch("https://disciplines-jackie-distributions-peak.trycloudflare.com/bypass", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-API-Key": "a1d2i3t4y5a6"
-            },
-            body: JSON.stringify({ url })
-        });
-
-        const data = await response.json();
-
-        if (data.error) {
-            resultBox.innerHTML = `
-                ❌ <b>Bypass Failed</b><br><br>
-                <b>Error:</b> ${data.error}
-            `;
-            return;
-        }
-
-        resultBox.innerHTML = `
-            ✅ <b>Bypass Successful</b><br><br>
-            <b>Original:</b><br>${url}<br><br>
-
-            <b>Bypassed:</b><br>
-            <a href="${data.bypassed}" target="_blank">${data.bypassed}</a><br><br>
-
-            ${data.embed ? `<b>Embed:</b><br><a href="${data.embed}" target="_blank">${data.embed}</a><br><br>` : ""}
-
-            <b>Time Taken:</b> ${data.elapsed_s} seconds<br><br>
-
-            <i>Powered by AutoVerse Backend</i>
-        `;
-
-    } catch (e) {
-        resultBox.innerHTML = `
-            ❌ <b>Bypass Failed</b><br><br>
-            Error: ${e}
-        `;
-    }
+    resultBox.innerHTML = `
+      <b>Bypassed:</b><br>
+      <a href="${data.bypassed}" target="_blank">${data.bypassed}</a>
+      <br><br>
+      ${data.embed ? `<b>Embed:</b><br>${data.embed}<br><br>` : ""}
+      <b>Time:</b> ${data.elapsed_s}s
+    `;
+  } catch (err) {
+    resultBox.innerHTML = "<b>Request failed</b>";
+  }
 }
-</script>
-
-</body>
+</script></body>
 </html>
