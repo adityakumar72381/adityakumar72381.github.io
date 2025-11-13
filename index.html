@@ -1,182 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pastebin - Create and Share Links & Text</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet" />
-<style>
-:root {
-  --bg:#0b0d10; --text:#e8f1f7; --card:#12151b; --muted:#9aa4b2;
-  --accent:#3ea6ff; --link:#47caff; --radius:14px; --shadow:0 4px 40px rgba(0,0,0,0.45);
-}
-body {
-  margin:0; font-family:'Inter',sans-serif; background:var(--bg); color:var(--text);
-  transition:background 0.4s,color 0.4s; overflow-x:hidden;
-}
-body.no-scroll {overflow:hidden;}
-
-header {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:18px 22px; 
-  border-bottom:1px solid rgba(255,255,255,0.1);
-  background:var(--bg);
-  box-shadow:0 1px 0 rgba(0,0,0,0.6);
-  position:relative; z-index:2000;
-}
-.light header {
-  border-bottom:1px solid rgba(0,0,0,0.1);
-  box-shadow:0 1px 0 rgba(0,0,0,0.08);
-}
-
-.title {
-  font-family:'Poppins',sans-serif; font-weight:700; font-size:1.5rem;
-  background:linear-gradient(90deg,#47caff,#ff5f6d);
-  -webkit-background-clip:text; color:transparent; letter-spacing:0.5px;
-}
-.header-right {display:flex; align-items:center; gap:16px;}
-.theme-toggle,.menu-icon {cursor:pointer;width:28px;height:28px;}
-main {max-width:900px;margin:auto;padding:40px 20px;}
-section {
-  background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
-  padding:24px; margin:24px 0; opacity:0; transform:translateY(30px);
-  animation:fadeUp 0.8s ease forwards;
-}
-section:nth-child(2){animation-delay:0.1s;}
-section:nth-child(3){animation-delay:0.2s;}
-section:nth-child(4){animation-delay:0.3s;}
-section:nth-child(5){animation-delay:0.4s;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-h1,h2{font-family:'Poppins',sans-serif;}
-h1{font-size:1.8rem;margin-bottom:12px;}
-h2{font-size:1.4rem;margin-bottom:10px;}
-p{line-height:1.6;color:var(--muted);}
-a{color:var(--link);text-decoration:none;}
-a:hover{text-decoration:underline;}
-button{
-  background:var(--accent);color:#fff;border:none;border-radius:8px;
-  padding:12px 22px;font-size:1rem;cursor:pointer;transition:background 0.3s;
-}
-button:hover{background:#1e90ff;}
-.hero{text-align:center;padding:50px 0 30px 0;}
-.hero h1{font-size:2rem;}
-.hero p{font-size:1.1rem;color:var(--muted);}
-.cta-buttons{margin-top:20px;}
-.cta-buttons button{margin:0 8px;}
-footer{text-align:center;color:var(--muted);padding:40px 0;font-size:0.9rem;}
-.light{
-  --bg:#f9fafc;--text:#0b0d10;--card:#fff;--muted:#444;--link:#0056d6;--shadow:none;
-}
-
-.menu-overlay{
-  position:fixed;top:0;right:-100%;width:100%;height:100%;
-  background:var(--bg);color:var(--text);
-  display:flex;flex-direction:column;
-  transition:right 0.4s ease-in-out;z-index:1500;
-}
-.menu-overlay.active{right:0;}
-.menu-links{
-  display:flex;flex-direction:column;align-items:center;
-  padding-top:120px;
-  gap:26px;flex:1;
-}
-.menu-links a{
-  font-size:1.4rem;color:var(--text);text-decoration:none;transition:color 0.2s;
-}
-.menu-links a:hover{color:var(--accent);}
-</style>
+    <meta charset="UTF-8">
+    <title>AutoVerse Bypass</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0d0d0d;
+            color: #fff;
+            padding: 30px;
+        }
+        .box {
+            max-width: 500px;
+            margin: auto;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005fcc;
+        }
+        .result {
+            margin-top: 20px;
+            background: #111;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        a {
+            color: #4da3ff;
+            word-break: break-all;
+        }
+    </style>
 </head>
 <body>
-<header>
-  <div class="title">PASTEBIN</div>
-  <div class="header-right">
-    <div id="themeToggle">
-      <svg class="theme-toggle" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z"/></svg>
-    </div>
-    <div id="menuBtn" class="menu-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </div>
-  </div>
-</header>
 
-<div id="menuOverlay" class="menu-overlay">
-  <div class="menu-links">
-    <a href="#create">Create</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-  </div>
+<div class="box">
+    <h2>🔗 AutoVerse Link Bypass</h2>
+    <input type="text" id="urlInput" placeholder="Paste your link here...">
+    <button onclick="bypass()">Bypass Now</button>
+
+    <div id="result" class="result"></div>
 </div>
 
-<main>
-  <div class="hero">
-    <h1>Create and Publish Plain Text Containing Links</h1>
-    <p>No login required — create and share right away.</p>
-    <div class="cta-buttons">
-      <button onclick="scrollToSection('create')">Start Now</button>
-      <button onclick="scrollToSection('about')">Learn More</button>
-    </div>
-  </div>
-
-  <section id="create">
-    <h2>Paste Links and Text Together</h2>
-    <p>Write text, web addresses, or both, and publish instantly. Links are converted automatically — just separate with a space or new line.</p>
-  </section>
-
-  <section>
-    <h2>Reliable & Long Established</h2>
-    <p>Pastebin has been online since 2014 with minimal downtime. We ensure 24/7 uptime and lightning-fast performance.</p>
-  </section>
-
-  <section id="contact">
-    <h2>Human Translated</h2>
-    <p>Available in 12 languages, translated by native speakers.</p>
-  </section>
-
-  <section id="about">
-    <h2>Anonymous Editing & Security</h2>
-    <p>Edit anytime with an edit code — no account needed.</p>
-  </section>
-
-  <section>
-    <h2>Earn From Your Pastes</h2>
-    <p>Set up an ad connection to earn from your links.</p>
-  </section>
-</main>
-
-<footer>© 2025 Pastebin.net | All Rights Reserved</footer>
-
 <script>
-function darkIcon(){
-return `<svg class="theme-toggle" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z"/></svg>`;
-}
-function lightIcon(){
-return `<svg class="theme-toggle" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clip-rule="evenodd"/></svg>`;
-}
-function menuSvg(){
-return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>`;
-}
-function closeSvg(){
-return `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6.225 4.811a1 1 0 0 0-1.414 1.414L10.586 12l-5.775 5.775a1 1 0 0 0 1.414 1.414L12 13.414l5.775 5.775a1 1 0 0 0 1.414-1.414L13.414 12l5.775-5.775a1 1 0 0 0-1.414-1.414L12 10.586 6.225 4.811Z" clip-rule="evenodd"/></svg>`;
-}
+async function bypass() {
+    const url = document.getElementById("urlInput").value.trim();
+    const resultBox = document.getElementById("result");
 
-const toggle=document.getElementById('themeToggle');
-toggle.addEventListener('click',()=>{
-  document.body.classList.toggle('light');
-  toggle.innerHTML=document.body.classList.contains('light')?lightIcon():darkIcon();
-});
-const menuBtn=document.getElementById('menuBtn');
-const menuOverlay=document.getElementById('menuOverlay');
-let menuOpen=false;
-menuBtn.addEventListener('click',()=>{
-  menuOpen=!menuOpen;
-  menuOverlay.classList.toggle('active');
-  document.body.classList.toggle('no-scroll',menuOpen);
-  menuBtn.innerHTML=menuOpen?closeSvg():menuSvg();
-});
-function scrollToSection(id){
-  const target=document.getElementById(id);
-  if(target) target.scrollIntoView({behavior:"smooth"});
+    if (!url) {
+        alert("Please enter a URL.");
+        return;
+    }
+
+    resultBox.style.display = "block";
+    resultBox.innerHTML = "⏳ Processing your request...";
+
+    try {
+        const response = await fetch("http://152.53.199.86:8080/bypass", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-API-Key": "a1d2i3t4y5a6"
+            },
+            body: JSON.stringify({ url })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            resultBox.innerHTML = `
+                ❌ <b>Bypass Failed</b><br><br>
+                <b>Error:</b> ${data.error}
+            `;
+            return;
+        }
+
+        resultBox.innerHTML = `
+            ✅ <b>Bypass Successful</b><br><br>
+            <b>Original:</b><br>${url}<br><br>
+
+            <b>Bypassed:</b><br>
+            <a href="${data.bypassed}" target="_blank">${data.bypassed}</a><br><br>
+
+            ${data.embed ? `<b>Embed:</b><br><a href="${data.embed}" target="_blank">${data.embed}</a><br><br>` : ""}
+
+            <b>Time Taken:</b> ${data.elapsed_s} seconds<br><br>
+
+            <i>Powered by AutoVerse Backend</i>
+        `;
+
+    } catch (e) {
+        resultBox.innerHTML = `
+            ❌ <b>Bypass Failed</b><br><br>
+            Error: ${e}
+        `;
+    }
 }
 </script>
+
 </body>
 </html>
