@@ -121,7 +121,7 @@ async function startBypass() {
 
   try {
     // Call your backend (Cloudflare Worker recommended)
-    const response = await fetch("/api/bypass", {
+    const response = await fetch("https://api.nxlinks.site/bypass", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({url: link})
