@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Admin Panel</title>
+  <title>Manual Verification</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Font -->
@@ -10,64 +10,57 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="verify.css">
 </head>
 <body>
 
-  <div class="page">
-    <div class="admin-wrapper" id="admin">
+  <!-- Background -->
+  <div class="grid-bg"></div>
+  <div class="snow" id="snow"></div>
 
-      <h1 class="admin-title">Admin Panel</h1>
-      <p class="admin-subtitle">
-        Configure API token and generate final links
+  <!-- Page -->
+  <main class="page">
+    <div class="verify-box">
+
+      <!-- OPTIONAL AD -->
+      <a
+        href="https://example.com"
+        target="_blank"
+        class="ad-badge"
+        id="adBadge"
+      >
+        <img src="https://via.placeholder.com/150x150?text=ADS" alt="Ad">
+      </a>
+
+      <h1 class="title">Manual Verification Required</h1>
+      <p class="subtitle">
+        Please complete the verification below to continue.
       </p>
 
-      <!-- TOKEN CARD -->
-      <div class="card" id="tokenCard">
-        <label class="label">API Token</label>
-        <input
-          id="tokenInput"
-          type="password"
-          placeholder="example.com"
-          class="input"
-        />
-        <button class="btn secondary" onclick="saveToken()">
-          Save Token
-        </button>
+      <!-- Turnstile placeholder -->
+      <div class="turnstile">
+        Turnstile widget goes here
       </div>
 
-      <!-- UPDATE TOKEN -->
-      <button class="btn settings hidden" id="updateTokenBtn" onclick="showToken()">
-        ⚙️ Update Token
+      <!-- Action button -->
+      <button class="action-btn" id="actionBtn" disabled>
+        Please wait
       </button>
 
-      <!-- LINK CARD -->
-      <div class="card">
-        <label class="label">Input Link</label>
-        <input
-          id="linkInput"
-          type="text"
-          placeholder="example.com"
-          class="input"
-        />
+      <!-- Divider -->
+      <div class="divider"></div>
 
-        <button class="btn primary" onclick="generateLink()">
-          Generate Final Link
-        </button>
-
-        <!-- OUTPUT -->
-        <div class="output hidden" id="outputBox">
-          <span class="label">Final Link</span>
-          <div class="output-row">
-            <div id="finalLink" class="output-text"></div>
-            <button class="copy-btn" onclick="copyLink()">Copy</button>
-          </div>
-        </div>
-      </div>
+      <!-- Footer -->
+      <p class="footer-text">
+        Created by
+        <a href="https://t.me/Obsidian_Bots" target="_blank" rel="noopener">
+          Obsidian Bots
+        </a>
+      </p>
 
     </div>
-  </div>
+  </main>
 
-  <script src="admin.js"></script>
+  <script src="verify.js"></script>
 </body>
 </html>
