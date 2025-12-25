@@ -5,20 +5,16 @@
   <title>Admin Panel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Inter font (same as before) -->
+  <!-- Inter font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Existing background CSS -->
   <link rel="stylesheet" href="background.css">
-
-  <!-- Admin specific styles -->
   <link rel="stylesheet" href="admin.css">
 </head>
 <body>
 
-  <!-- Shared background -->
   <div class="grid-bg"></div>
   <div id="particles" class="particles"></div>
 
@@ -29,16 +25,21 @@
       <p class="admin-subtitle">Configure API token and generate final links</p>
 
       <!-- Token Card -->
-      <div class="card">
+      <div class="card" id="tokenCard">
         <label class="label">API Token</label>
         <input
           id="tokenInput"
           type="password"
-          placeholder="Enter API token"
+          placeholder="example.com"
           class="input"
         />
         <button class="btn secondary" onclick="saveToken()">Save Token</button>
       </div>
+
+      <!-- Update Token Button -->
+      <button class="btn settings hidden" id="updateTokenBtn" onclick="showTokenCard()">
+        ⚙️ Update Token
+      </button>
 
       <!-- Link Card -->
       <div class="card">
@@ -46,7 +47,7 @@
         <input
           id="linkInput"
           type="text"
-          placeholder="Paste link here"
+          placeholder="example.com"
           class="input"
         />
 
@@ -54,10 +55,12 @@
           Generate Final Link
         </button>
 
-        <div class="output">
+        <!-- Output -->
+        <div class="output hidden" id="outputSection">
           <span class="output-label">Final Link</span>
-          <div id="outputLink" class="output-box">
-            —
+          <div class="output-row">
+            <div id="outputLink" class="output-box"></div>
+            <button class="copy-btn" onclick="copyLink()">Copy</button>
           </div>
         </div>
       </div>
