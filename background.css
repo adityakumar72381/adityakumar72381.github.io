@@ -15,7 +15,7 @@ body {
   background: var(--bg-dark);
   min-height: 100vh;
   overflow-x: hidden;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* =========================
@@ -53,6 +53,7 @@ body {
   overflow: hidden;
 }
 
+/* Floating particles */
 .particle {
   position: absolute;
   width: 4px;
@@ -78,6 +79,7 @@ body {
   100% { transform: translateY(-20px); opacity: 0; }
 }
 
+/* Snowflakes */
 .snowflake {
   position: absolute;
   color: rgba(255,255,255,0.6);
@@ -100,7 +102,7 @@ body {
 }
 
 /* =========================
-   CENTER BOX
+   CENTER PANEL
 ========================= */
 .center-box {
   position: absolute;
@@ -163,14 +165,14 @@ body {
 }
 
 /* =========================
-   TEXT
+   TEXT STYLES
 ========================= */
 .alert-title {
   font-size: 1.9rem;
   font-weight: 700;
+  letter-spacing: 0.6px;
   color: #ff3d5a;
   margin-bottom: 14px;
-  letter-spacing: 0.4px;
 }
 
 .alert-text {
@@ -196,13 +198,13 @@ body {
 /* Footer */
 .footer-text {
   font-size: 0.82rem;
+  font-weight: 500;
   color: #9fb6cc;
 }
 
 .footer-text a {
   color: #4fc3ff;
   text-decoration: none;
-  font-weight: 500;
 }
 
 .footer-text a:hover {
