@@ -1,50 +1,210 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Winter Background</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* =========================
+   BASE
+========================= */
+:root {
+  --bg-dark: #0a0a0f;
+}
 
-  <link rel="stylesheet" href="background.css">
-</head>
-<body>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <div class="grid-bg"></div>
-  <div id="particles" class="particles"></div>
+body {
+  background: var(--bg-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-  <main class="page">
-    <div class="center-box">
+/* =========================
+   WINTER GRID BACKGROUND
+========================= */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
 
-      <!-- Lock Icon -->
-      <div class="lock-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-          <path d="M6 10V8a6 6 0 1 1 12 0v2"
-                stroke="#ff3d5a" stroke-width="2" stroke-linecap="round"/>
-          <rect x="5" y="10" width="14" height="10" rx="2"
-                stroke="#ff3d5a" stroke-width="2"/>
-        </svg>
-      </div>
+.grid-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,61,90,0.08), transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(0,212,170,0.05), transparent 40%),
+    radial-gradient(ellipse at 20% 80%, rgba(255,215,0,0.05), transparent 40%);
+}
 
-      <!-- Warning Title -->
-      <h1 class="alert-title">Bypass Detected!</h1>
+/* =========================
+   PARTICLES + SNOW
+========================= */
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
 
-      <!-- Warning Text -->
-      <p class="alert-text">
-        Don't be oversmart and bypass links for a paid content.<br>
-        Repeated violation may block your account from accessing links.
-      </p>
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ffd700;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float-particle linear infinite;
+}
 
-      <div class="divider"></div>
+.particle:nth-child(odd) {
+  background: #ff3d5a;
+}
 
-      <!-- Footer -->
-      <p class="footer-text">
-        Created by obsidian bots
-        (<a href="https://t.me/Obsidian_Bots" target="_blank">https://t.me/Obsidian_Bots</a>)
-      </p>
+.particle:nth-child(3n) {
+  background: #00d4aa;
+}
 
-    </div>
-  </main>
+@keyframes float-particle {
+  0% { transform: translateY(100vh); opacity: 0; }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-20px); opacity: 0; }
+}
 
-  <script src="background.js"></script>
-</body>
-</html>
+.snowflake {
+  position: absolute;
+  color: rgba(255,255,255,0.6);
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  animation: snowfall linear infinite;
+}
+
+@keyframes snowfall {
+  from { transform: translateY(-20px); }
+  to { transform: translateY(100vh); }
+}
+
+/* =========================
+   PAGE CONTENT
+========================= */
+.page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+}
+
+/* =========================
+   CENTER BOX
+========================= */
+.center-box {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.center-box .content {
+  width: 100%;
+  max-width: 420px;
+  padding: 38px 28px;
+
+  background: linear-gradient(
+    160deg,
+    rgba(10, 25, 40, 0.9),
+    rgba(6, 14, 22, 0.95)
+  );
+
+  border-radius: 18px;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 170, 255, 0.22);
+
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.65),
+    inset 0 0 35px rgba(0, 160, 255, 0.06);
+
+  text-align: center;
+  color: #e8f1ff;
+}
+
+/* =========================
+   OPENING ANIMATION
+========================= */
+.animate-in {
+  animation: panelEnter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes panelEnter {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================
+   SKULL ICON
+========================= */
+.skull-icon {
+  font-size: 3rem;
+  margin-bottom: 18px;
+  color: #ff3d5a;
+  text-shadow: 0 0 14px rgba(255, 61, 90, 0.6);
+}
+
+/* =========================
+   TEXT
+========================= */
+.alert-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #ff3d5a;
+  margin-bottom: 14px;
+  letter-spacing: 0.4px;
+}
+
+.alert-text {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #d4e1ef;
+  margin-bottom: 24px;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 170, 255, 0.45),
+    transparent
+  );
+  margin-bottom: 18px;
+}
+
+/* Footer */
+.footer-text {
+  font-size: 0.82rem;
+  color: #9fb6cc;
+}
+
+.footer-text a {
+  color: #4fc3ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
