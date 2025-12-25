@@ -1,159 +1,173 @@
+/* =========================
+   BASE
+========================= */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: "Inter", system-ui, sans-serif;
 }
 
 body {
   min-height: 100vh;
-  background: radial-gradient(
-    circle at top,
-    #0f172a,
-    #020617 70%
-  );
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #e5e7eb;
+  background: #0a0a0f;
+  color: #e8f1ff;
+  overflow: hidden;
 }
 
+/* =========================
+   GRID BACKGROUND
+========================= */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* =========================
+   SNOW
+========================= */
+.snow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snow span {
+  position: absolute;
+  color: rgba(255,255,255,0.6);
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  animation: snowFall linear infinite;
+}
+
+@keyframes snowFall {
+  from { transform: translateY(-20px); }
+  to { transform: translateY(100vh); }
+}
+
+/* =========================
+   PAGE LAYOUT
+========================= */
 .page {
-  width: 100%;
-}
-
-.admin-wrapper {
-  max-width: 420px;
-  margin: auto;
-  padding: 30px 20px;
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  gap: 22px;
-
-  /* animation */
-  opacity: 0;
-  transform: translateY(25px);
-  animation: fadeInUp 0.8s ease forwards;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-@keyframes fadeInUp {
+/* =========================
+   VERIFY BOX
+========================= */
+.verify-box {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  padding: 44px 32px;
+
+  background: linear-gradient(
+    160deg,
+    rgba(10, 25, 40, 0.92),
+    rgba(6, 14, 22, 0.96)
+  );
+
+  border-radius: 22px;
+  border: 1px solid rgba(0, 170, 255, 0.22);
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.65),
+    inset 0 0 40px rgba(0,160,255,0.06);
+
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(30px);
+  animation: panelIn 0.9s ease forwards;
+}
+
+@keyframes panelIn {
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.admin-title {
-  text-align: center;
-  font-size: 2rem;
+/* =========================
+   AD BADGE
+========================= */
+.ad-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.15);
+  display: none;
+}
+
+.ad-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================
+   CONTENT
+========================= */
+.title {
+  font-size: 1.9rem;
   font-weight: 700;
+  margin-bottom: 14px;
 }
 
-.admin-subtitle {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #9ca3af;
+.subtitle {
+  font-size: 0.95rem;
+  color: #9fb6cc;
+  margin-bottom: 28px;
 }
 
-/* CARD */
-.card {
-  background: linear-gradient(
-    160deg,
-    rgba(30, 41, 59, 0.9),
-    rgba(15, 23, 42, 0.95)
-  );
-  border-radius: 16px;
-  padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Turnstile */
+.turnstile {
+  height: 90px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px dashed rgba(255,255,255,0.25);
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  color: #9fb6cc;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
 }
 
-/* LABEL */
-.label {
-  font-size: 0.8rem;
-  color: #9ca3af;
-}
-
-/* INPUT */
-.input {
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
-  outline: none;
-}
-
-.input:focus {
-  border-color: #3b82f6;
-}
-
-/* BUTTONS */
-.btn {
-  padding: 12px;
-  border-radius: 10px;
+/* Button */
+.action-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
   border: none;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+
+  transition: all 0.3s ease;
 }
 
-.btn.primary {
-  background: #3b82f6;
-  color: white;
-}
-
-.btn.secondary {
-  background: rgba(255, 255, 255, 0.08);
-  color: #e5e7eb;
-}
-
-.btn.settings {
-  background: rgba(255, 255, 255, 0.05);
-  color: #9ca3af;
-}
-
-.btn:hover {
-  filter: brightness(1.1);
-}
-
-/* OUTPUT */
-.output {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.output-row {
-  display: flex;
-  gap: 8px;
-}
-
-.output-text {
-  flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.4);
-  color: #60a5fa;
-  font-size: 0.85rem;
-  word-break: break-all;
-}
-
-.copy-btn {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: none;
-  background: rgba(96, 165, 250, 0.2);
-  color: #60a5fa;
-  cursor: pointer;
-}
-
-.copy-btn:hover {
-  background: rgba(96, 165, 250, 0.3);
-}
-
-.hidden {
-  display: none;
+.action-btn:disabled {
+  background: rgba(255,255,255,0.15);
+  color: #cbd5e1;
+  cursor: not-allowed;
 }
