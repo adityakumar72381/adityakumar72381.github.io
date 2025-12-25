@@ -1,47 +1,37 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const savedToken = localStorage.getItem("api_token");
+/* =========================
+   SNOW GENERATOR
+========================= */
+const snow = document.getElementById("snow");
 
-  if (savedToken) {
-    document.getElementById("tokenCard").classList.add("hidden");
-    document.getElementById("updateTokenBtn").classList.remove("hidden");
-  }
-});
-
-function saveToken() {
-  const token = document.getElementById("tokenInput").value.trim();
-  if (!token) {
-    alert("Token cannot be empty");
-    return;
-  }
-
-  localStorage.setItem("api_token", token);
-
-  document.getElementById("tokenCard").classList.add("hidden");
-  document.getElementById("updateTokenBtn").classList.remove("hidden");
+for (let i = 0; i < 20; i++) {
+  const s = document.createElement("span");
+  s.textContent = "❄";
+  s.style.left = Math.random() * 100 + "%";
+  s.style.fontSize = 0.6 + Math.random() * 0.8 + "rem";
+  s.style.animationDuration = 12 + Math.random() * 18 + "s";
+  s.style.animationDelay = Math.random() * 10 + "s";
+  snow.appendChild(s);
 }
 
-function showToken() {
-  document.getElementById("tokenCard").classList.remove("hidden");
-  document.getElementById("updateTokenBtn").classList.add("hidden");
-}
+/* =========================
+   BUTTON STATE DEMO
+   (YOU WILL REPLACE THIS)
+========================= */
+const btn = document.getElementById("actionBtn");
 
-function generateLink() {
-  const link = document.getElementById("linkInput").value.trim();
-  if (!link) {
-    alert("Enter a link");
-    return;
-  }
+setTimeout(() => {
+  btn.disabled = false;
+  btn.textContent = "Verifying...";
+}, 2500);
 
-  const final = link + "?processed=true";
-  document.getElementById("finalLink").textContent = final;
-  document.getElementById("outputBox").classList.remove("hidden");
-}
+setTimeout(() => {
+  btn.textContent = "Continue";
+}, 4500);
 
-function copyLink() {
-  const text = document.getElementById("finalLink").textContent;
-  navigator.clipboard.writeText(text);
-
-  const btn = document.querySelector(".copy-btn");
-  btn.textContent = "Copied!";
-  setTimeout(() => (btn.textContent = "Copy"), 1200);
+/* =========================
+   AD TOGGLE
+========================= */
+const showAd = false; // set true to show ad
+if (showAd) {
+  document.getElementById("adBadge").style.display = "block";
 }
