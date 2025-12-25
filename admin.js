@@ -20,7 +20,7 @@ function saveToken() {
   document.getElementById("updateTokenBtn").classList.remove("hidden");
 }
 
-function showTokenCard() {
+function showToken() {
   document.getElementById("tokenCard").classList.remove("hidden");
   document.getElementById("updateTokenBtn").classList.add("hidden");
 }
@@ -32,14 +32,13 @@ function generateLink() {
     return;
   }
 
-  const finalLink = link + "?processed=true";
-
-  document.getElementById("outputLink").textContent = finalLink;
-  document.getElementById("outputSection").classList.remove("hidden");
+  const final = link + "?processed=true";
+  document.getElementById("finalLink").textContent = final;
+  document.getElementById("outputBox").classList.remove("hidden");
 }
 
 function copyLink() {
-  const text = document.getElementById("outputLink").textContent;
+  const text = document.getElementById("finalLink").textContent;
   navigator.clipboard.writeText(text);
 
   const btn = document.querySelector(".copy-btn");
