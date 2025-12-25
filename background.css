@@ -210,3 +210,22 @@ body {
 .footer-text a:hover {
   text-decoration: underline;
 }
+
+/* =========================
+   DARK BLUE OUTER VIGNETTE
+========================= */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 35%,
+      rgba(5, 20, 40, 0.35) 65%,
+      rgba(3, 10, 25, 0.6) 100%
+    );
+}
