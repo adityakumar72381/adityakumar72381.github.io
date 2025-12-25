@@ -5,26 +5,24 @@
   <title>Admin Panel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Inter font -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="background.css">
   <link rel="stylesheet" href="admin.css">
 </head>
 <body>
 
-  <div class="grid-bg"></div>
-  <div id="particles" class="particles"></div>
-
-  <main class="page">
-    <div class="admin-wrapper animate-in">
+  <div class="page">
+    <div class="admin-wrapper" id="admin">
 
       <h1 class="admin-title">Admin Panel</h1>
-      <p class="admin-subtitle">Configure API token and generate final links</p>
+      <p class="admin-subtitle">
+        Configure API token and generate final links
+      </p>
 
-      <!-- Token Card -->
+      <!-- TOKEN CARD -->
       <div class="card" id="tokenCard">
         <label class="label">API Token</label>
         <input
@@ -33,15 +31,17 @@
           placeholder="example.com"
           class="input"
         />
-        <button class="btn secondary" onclick="saveToken()">Save Token</button>
+        <button class="btn secondary" onclick="saveToken()">
+          Save Token
+        </button>
       </div>
 
-      <!-- Update Token Button -->
-      <button class="btn settings hidden" id="updateTokenBtn" onclick="showTokenCard()">
+      <!-- UPDATE TOKEN -->
+      <button class="btn settings hidden" id="updateTokenBtn" onclick="showToken()">
         ⚙️ Update Token
       </button>
 
-      <!-- Link Card -->
+      <!-- LINK CARD -->
       <div class="card">
         <label class="label">Input Link</label>
         <input
@@ -55,20 +55,19 @@
           Generate Final Link
         </button>
 
-        <!-- Output -->
-        <div class="output hidden" id="outputSection">
-          <span class="output-label">Final Link</span>
+        <!-- OUTPUT -->
+        <div class="output hidden" id="outputBox">
+          <span class="label">Final Link</span>
           <div class="output-row">
-            <div id="outputLink" class="output-box"></div>
+            <div id="finalLink" class="output-text"></div>
             <button class="copy-btn" onclick="copyLink()">Copy</button>
           </div>
         </div>
       </div>
 
     </div>
-  </main>
+  </div>
 
-  <script src="background.js"></script>
   <script src="admin.js"></script>
 </body>
 </html>
